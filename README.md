@@ -1,6 +1,7 @@
 # Tired of Repeating AI Configurations?
 
-Are you a user fed up with setting up models and API keys in countless plugins?  
+Are you a user fed up with setting up models and API keys in countless plugins?
+
 Are you a developer frustrated by having to maintain separate infrastructures for each plugin—updating model lists, supporting local models, and handling custom endpoints?
 
 If so, give **AI Interface** a try. It’s a simple, centralized solution that streamlines AI/LLM service integration for Obsidian.
@@ -14,6 +15,8 @@ If so, give **AI Interface** a try. It’s a simple, centralized solution that s
 - **Shared API Access**: Once configured, other plugins can use these settings via a built-in API—no redundant setup needed.
 
 - **Secure and Easy**: Manage your sensitive credentials securely with encryption, all within an interface designed to match Obsidian’s style.
+
+### Screenshot
 
 ![image](https://github.com/user-attachments/assets/8f08f513-4c07-4e53-9946-6174cd8a65cc)
 
