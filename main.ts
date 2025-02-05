@@ -680,14 +680,14 @@ class AIInterfaceSettingTab extends PluginSettingTab {
         const {containerEl} = this;
         containerEl.empty();
         
-        containerEl.createEl('h2', {text: 'AI Interface Settings'});
+        containerEl.createEl('h2', {text: 'Ai interface settings'});
 
         // Service Management
-        containerEl.createEl('h3', {text: 'AI Services'});
+        containerEl.createEl('h3', {text: 'Ai services'});
 
         // Active Service Selection
         new Setting(containerEl)
-            .setName('Active Service')
+            .setName('Active service')
             .setDesc('Select the AI service to use')
             .addDropdown(dropdown => {
                 // Add all available services
@@ -705,7 +705,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
 
         // Add New Service Button
         new Setting(containerEl)
-            .setName('Add New Service')
+            .setName('Add new service')
             .setDesc('Add a new AI service configuration')
             .addButton(button => button
                 .setButtonText('Add Service')
@@ -733,7 +733,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
 
             // Service Name
             new Setting(containerEl)
-                .setName('Service Name')
+                .setName('Service name')
                 .setDesc('Enter a name for this service')
                 .addText(text => text
                     .setValue(activeService.name)
@@ -782,7 +782,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
             if (!activeService.isLocal) {
                 const apiKeyContainer = containerEl.createDiv();
                 const apiKeySetting = new Setting(apiKeyContainer)
-                    .setName('API Key')
+                    .setName('Api key')
                     .setDesc('Enter the API key for this service')
                     .addText(text => {
                         const input = text
@@ -804,8 +804,12 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                 // Add masked display of the API key
                 const apiKeyDisplay = apiKeyContainer.createDiv();
                 apiKeyDisplay.style.marginTop = '6px';
-                apiKeyDisplay.style.marginLeft = '15px';
+                apiKeyDisplay.style.marginLeft = 'auto'; // Move to the right
                 apiKeyDisplay.style.color = 'var(--text-muted)';
+                apiKeyDisplay.style.position = 'absolute';
+                apiKeyDisplay.style.right = '50px';
+                apiKeyDisplay.style.top = '50%';
+                apiKeyDisplay.style.transform = 'translateY(-50%)';
                 apiKeyDisplay.innerText = AIInterfacePlugin.maskApiKey(activeService.apiKey);
 
                 // Add show/hide toggle button
@@ -889,7 +893,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                                 customModelDiv.style.marginTop = '6px';
                                 
                                 new Setting(customModelDiv)
-                                    .setName('Custom Model')
+                                    .setName('Custom model')
                                     .setDesc('Enter the model identifier')
                                     .addText(text => text
                                         .setPlaceholder('Enter model name/identifier')
@@ -913,7 +917,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                 customModelDiv.style.marginTop = '6px';
                 
                 new Setting(customModelDiv)
-                    .setName('Custom Model')
+                    .setName('Custom model')
                     .setDesc('Enter the model identifier')
                     .addText(text => text
                         .setPlaceholder('Enter model name/identifier')
@@ -927,7 +931,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
             // Endpoint URL for Custom Provider
             if (activeService.provider === 'custom') {
                 new Setting(containerEl)
-                    .setName('Endpoint URL')
+                    .setName('Endpoint url')
                     .setDesc('Enter the API endpoint URL')
                     .addText(text => text
                         .setPlaceholder('https://api.example.com/v1/chat/completions')
@@ -939,7 +943,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
 
                 // Authentication Type
                 new Setting(containerEl)
-                    .setName('Authentication Type')
+                    .setName('Authentication type')
                     .setDesc('Select how to authenticate with this service')
                     .addDropdown(dropdown => dropdown
                         .addOption('bearer', 'Bearer Token')
@@ -955,7 +959,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
             // Delete Service Button (don't allow deleting the last service)
             if (Object.keys(this.plugin.settings.services).length > 1) {
                 new Setting(containerEl)
-                    .setName('Delete Service')
+                    .setName('Delete service')
                     .setDesc('Remove this service configuration')
                     .addButton(button => button
                         .setButtonText('Delete')
@@ -971,7 +975,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
         }
 
         // Advanced Settings
-        containerEl.createEl('h3', {text: 'Advanced Settings'});
+        containerEl.createEl('h3', {text: 'Advanced settings'});
 
         new Setting(containerEl)
             .setName('Temperature')
