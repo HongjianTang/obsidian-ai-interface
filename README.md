@@ -1,4 +1,9 @@
-# Tired of Repeating AI Configurations?
+# Obsidian AI Interface Plugin :bulb: :books:
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/HongjianTang/obsidian-ai-interface?style=for-the-badge)
+![GitHub all releases](https://img.shields.io/github/downloads/HongjianTang/obsidian-ai-interface/total?style=for-the-badge)
+
+## Tired of Repeating AI Configurations?
 
 Are you a user fed up with setting up models and API keys in countless plugins?
 
@@ -22,10 +27,24 @@ If so, give **AI Interface** a try. It’s a simple, centralized solution that s
 
 ## Installation
 
+### From Obsidian Community Plugins
+
+PS: It's still under review, so you need to install it manually for now.
+
 1. Open Obsidian Settings
 2. Navigate to "Community plugins" and click "Browse"
 3. Search for "AI Interface" and click Install
 4. Enable the plugin in Community plugins
+5. Set up your API key in plugin settings
+
+6. Restart Obsidian
+
+### Manual Installation
+
+1. Download the latest release from the [Releases](https://github.com/HongjianTang/obsidian-ai-interface/releases) page
+2. Unzip the file and rename the folder to "ai-interface"
+3. Copy the "ai-interface" folder to your Obsidian plugins folder
+4. Enable the plugin in Obsidian settings
 5. Set up your API key in plugin settings
 6. Restart Obsidian
 
