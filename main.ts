@@ -845,14 +845,21 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                 .setDesc('Choose the AI model')
                 .addDropdown(dropdown => {
                     const models = this.getModelsForProvider(activeService.provider);
+                    const modelIds = models.map(m => m.id);
+                    
+                    // If current model is not in the list, it's a custom model
+                    const isCustomModel = activeService.model && !modelIds.includes(activeService.model);
+                    
                     models.forEach(model => {
                         dropdown.addOption(model.id, model.name);
                     });
 
                     return dropdown
-                        .setValue(activeService.model || 'custom')
+                        .setValue(isCustomModel ? 'custom' : (activeService.model || 'custom'))
                         .onChange(async (value) => {
-                            activeService.model = value;
+                            if (value !== 'custom') {
+                                activeService.model = value;
+                            }
                             await this.plugin.saveSettings();
                             
                             // Remove existing custom model input if it exists
@@ -872,7 +879,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                                     .setDesc('Enter the model identifier')
                                     .addText(text => text
                                         .setPlaceholder('Enter model name/identifier')
-                                        .setValue(activeService.model === 'custom' ? '' : activeService.model)
+                                        .setValue(isCustomModel ? activeService.model : '')
                                         .onChange(async (customValue) => {
                                             activeService.model = customValue;
                                             await this.plugin.saveSettings();
@@ -881,8 +888,12 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                         });
                 });
 
-            // If custom model is selected, show the input field immediately
-            if (activeService.model === 'custom' || !activeService.model) {
+            // If custom model is selected or current model is not in the predefined list, show the input field
+            const models = this.getModelsForProvider(activeService.provider);
+            const modelIds = models.map(m => m.id);
+            const isCustomModel = activeService.model && !modelIds.includes(activeService.model);
+            
+            if (activeService.model === 'custom' || !activeService.model || isCustomModel) {
                 const customModelDiv = modelContainer.createDiv();
                 customModelDiv.className = 'custom-model-input';
                 customModelDiv.style.marginTop = '6px';
@@ -892,7 +903,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                     .setDesc('Enter the model identifier')
                     .addText(text => text
                         .setPlaceholder('Enter model name/identifier')
-                        .setValue(activeService.model === 'custom' ? '' : activeService.model)
+                        .setValue(isCustomModel ? activeService.model : '')
                         .onChange(async (customValue) => {
                             activeService.model = customValue;
                             await this.plugin.saveSettings();
