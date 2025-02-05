@@ -7,25 +7,21 @@ The **AI Interface Plugin for Obsidian** provides a centralized, flexible, and s
 ## Features
 
 - **Centralized AI Configuration**:
-    
     Configure API keys, select models, and set custom endpoints (e.g., OpenRouter, Azure, or local LLM) in one place.
     
 - **Custom Endpoint Flexibility**:
-    
     Users can specify custom endpoints for various AI services, allowing for integration with multiple providers beyond the default options.
     
 - **Exposed API for Extensibility**:
-    
     Other plugins can access AI features through a defined API. This means once you configure your AI/LLM settings, any compatible plugin can leverage these settings without requiring its own configuration.
     
 - **Secure Credential Management**:
-    
     Sensitive information like API keys is securely stored using encryption to ensure your data remains protected.
     
 - **User-Friendly Interface**:
-    
     Designed to align with Obsidian's UI/UX, making it easy for both novice and advanced users to configure and manage AI settings.
-    
+
+![image](https://github.com/user-attachments/assets/8f08f513-4c07-4e53-9946-6174cd8a65cc)
 
 ---
 
