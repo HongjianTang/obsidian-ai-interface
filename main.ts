@@ -277,6 +277,9 @@ export default class AIInterfacePlugin extends Plugin {
 
     private parseResponse(provider: AIServiceConfig['provider'], data: any): AIResponse {
         try {
+            console.log('Parsing response for provider:', provider);
+            console.log('Raw response data:', JSON.stringify(data, null, 2));
+
             switch (provider) {
                 case 'openai':
                     return {
@@ -327,6 +330,44 @@ export default class AIInterfacePlugin extends Plugin {
                         content: data.results[0].text.trim()
                     };
 
+                case 'custom':
+                    console.log('Attempting to parse custom provider response');
+                    // Try different common response formats
+                    if (data.choices?.[0]?.message?.content) {
+                        console.log('Found OpenAI-like response format');
+                        return { content: data.choices[0].message.content.trim() };
+                    }
+                    if (data.output?.text) {
+                        console.log('Found output.text format');
+                        return { content: data.output.text.trim() };
+                    }
+                    if (data.response) {
+                        console.log('Found direct response format');
+                        return { content: data.response.trim() };
+                    }
+                    if (data.message?.content) {
+                        console.log('Found message.content format');
+                        return { content: data.message.content.trim() };
+                    }
+                    if (data.text || data.content) {
+                        console.log('Found text/content format');
+                        return { content: (data.text || data.content).trim() };
+                    }
+                    // For OpenRouter specific format
+                    if (data.choices?.[0]?.content) {
+                        console.log('Found OpenRouter format');
+                        return { content: data.choices[0].content.trim() };
+                    }
+                    // For OpenRouter alternative format
+                    if (data.choices?.[0]?.text) {
+                        console.log('Found OpenRouter alternative format');
+                        return { content: data.choices[0].text.trim() };
+                    }
+
+                    console.log('No known response format found');
+                    console.log('Available response properties:', Object.keys(data));
+                    throw new Error('Unable to parse response format');
+
                 default:
                     // For custom providers, try common response formats
                     if (data.choices?.[0]?.message?.content) {
@@ -341,6 +382,8 @@ export default class AIInterfacePlugin extends Plugin {
                     throw new Error('Unable to parse response format');
             }
         } catch (error) {
+            console.error('Error parsing response:', error);
+            console.error('Failed response data:', JSON.stringify(data, null, 2));
             return {
                 content: '',
                 error: 'Failed to parse response: ' + error.message
@@ -349,7 +392,10 @@ export default class AIInterfacePlugin extends Plugin {
     }
 
     async invokeAI(prompt: string, options: Partial<AIRequestOptions> = {}): Promise<string> {
+        console.log('Invoking AI with options:', JSON.stringify(options, null, 2));
         const activeService = this.settings.services[this.settings.activeService];
+        console.log('Using service:', JSON.stringify(activeService, null, 2));
+
         if (!activeService) {
             throw new Error('AI Interface is not properly configured');
         }
@@ -377,6 +423,11 @@ export default class AIInterfacePlugin extends Plugin {
                 switch (activeService.authType) {
                     case 'bearer':
                         headers['Authorization'] = `Bearer ${activeService.apiKey}`;
+                        // Special handling for OpenRouter
+                        if (activeService.url.includes('openrouter.ai')) {
+                            headers['HTTP-Referer'] = 'http://localhost:8080';
+                            headers['X-Title'] = 'Obsidian AI Interface';
+                        }
                         break;
                     case 'api-key':
                         if (activeService.provider === 'azure') {
@@ -393,6 +444,8 @@ export default class AIInterfacePlugin extends Plugin {
                 }
             }
 
+            console.log('Request headers:', JSON.stringify(headers, null, 2));
+
             // Format request body according to provider
             const body = this.formatRequestBody(
                 activeService.provider,
@@ -403,27 +456,36 @@ export default class AIInterfacePlugin extends Plugin {
                 maxTokens
             );
 
+            console.log('Request body:', JSON.stringify(body, null, 2));
+
             const response = await fetch(activeService.url, {
                 method: 'POST',
                 headers,
                 body: JSON.stringify(body)
             });
 
+            console.log('Response status:', response.status);
             if (!response.ok) {
                 const error = await response.json().catch(() => null);
+                console.error('Error response:', error);
                 throw new Error(error?.error?.message || `HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
+            console.log('Response data:', JSON.stringify(data, null, 2));
+
             const result = this.parseResponse(activeService.provider, data);
             
             if (result.error) {
+                console.error('Parse error:', result.error);
                 throw new Error(result.error);
             }
 
+            console.log('Final parsed result:', result.content);
             return result.content;
 
         } catch (error) {
+            console.error('AI request failed:', error);
             new Notice(`AI Interface Error: ${error.message}`);
             throw error;
         }
