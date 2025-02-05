@@ -110,8 +110,7 @@ interface AIInterfaceSettings {
     maxTokens: number;
 }
 
-// Example 1: Basic Plugin Integration
-class BasicAIPlugin extends Plugin {
+class YourPlugin extends Plugin {
     async onload() {
         // Get AI Interface plugin instance
         const aiInterface = (window as any).aiInterfacePlugin;
@@ -143,6 +142,7 @@ class BasicAIPlugin extends Plugin {
     }
 }
 ```
+
 ## Roadmap
 
 - [ ] Encrypt API keys in the settings file
