@@ -136,6 +136,9 @@ class BasicAIPlugin extends Plugin {
     }
 }
 ```
+## Roadmap
+
+- [ ] Encrypt API keys in the settings file
 
 ## Contributing
 
