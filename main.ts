@@ -393,8 +393,22 @@ export default class AIInterfacePlugin extends Plugin {
 
     async invokeAI(prompt: string, options: Partial<AIRequestOptions> = {}): Promise<string> {
         console.log('Invoking AI with options:', JSON.stringify(options, null, 2));
-        const activeService = this.settings.services[this.settings.activeService];
-        console.log('Using service:', JSON.stringify(activeService, null, 2));
+        let activeService = this.settings.services[this.settings.activeService];
+        console.log('Initial service:', JSON.stringify(activeService, null, 2));
+
+        // If a specific model is requested and the current service doesn't have it,
+        // try to find another service that has this model
+        if (options.model && options.model !== activeService.model) {
+            console.log('Looking for service with model:', options.model);
+            const serviceWithModel = Object.entries(this.settings.services).find(([_, service]) => 
+                service.model === options.model
+            );
+
+            if (serviceWithModel) {
+                console.log('Found alternative service with requested model:', serviceWithModel[0]);
+                activeService = serviceWithModel[1];
+            }
+        }
 
         if (!activeService) {
             throw new Error('AI Interface is not properly configured');
