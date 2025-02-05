@@ -67,7 +67,7 @@ The plugin supports any AI endpoint that conforms to the expected API specificat
 
 ## Developer API
 
-Other plugins can take advantage of the AI Interface Plugin’s centralized configuration and functionality. Below is a summary of the available API.
+Other plugins can take advantage of the AI Interface Plugin's centralized configuration and functionality. Below is a summary of the available API.
 
 ### API Methods
 
@@ -94,27 +94,66 @@ Other plugins can integrate with the AI Interface Plugin using the global API ob
 
 ```jsx
 // Example usage in another plugin
-const aiPlugin = window.aiInterfacePlugin;
-
-if (aiPlugin && aiPlugin.isConfigured()) {
-  const config = aiPlugin.getCurrentConfiguration();
-  console.log("Current AI configuration:", config);
-
-  // Invoke the AI model with a sample prompt
-  aiPlugin.invokeAI("Summarize my recent notes", { temperature: 0.7 })
-    .then(response => {
-      console.log("AI response:", response);
-    })
-    .catch(error => {
-      console.error("Error invoking AI:", error);
-    });
-} else {
-  console.warn("AI Interface Plugin is not configured.");
+interface AIRequestOptions {
+    temperature?: number;
+    maxTokens?: number;
+    model?: string;
+    systemPrompt?: string;
 }
 
-```
+interface AIServiceConfig {
+    name: string;
+    url: string;
+    apiKey: string;
+    headers: Record<string, string>;
+    authType: 'bearer' | 'api-key' | 'custom' | 'none';
+    model: string;
+    provider: string;
+    isLocal?: boolean;
+}
 
-This API ensures that once a user configures their AI/LLM settings, any other plugin can easily utilize these settings without additional configuration overhead.
+interface AIInterfaceSettings {
+    activeService: string;
+    services: {
+        [key: string]: AIServiceConfig;
+    };
+    temperature: number;
+    maxTokens: number;
+}
+
+// Example 1: Basic Plugin Integration
+class BasicAIPlugin extends Plugin {
+    async onload() {
+        // Get AI Interface plugin instance
+        const aiInterface = (window as any).aiInterfacePlugin;
+        
+        if (!aiInterface) {
+            new Notice('AI Interface plugin is required');
+            return;
+        }
+
+        // Check if configured
+        if (!aiInterface.isConfigured()) {
+            new Notice('Please configure AI Interface first');
+            return;
+        }
+
+        // Simple AI invocation
+        try {
+            const response = await aiInterface.invokeAI(
+                "What is the capital of France?",
+                {
+                    temperature: 0.7,
+                    maxTokens: 100
+                }
+            );
+            console.log('AI response:', response);
+        } catch (error) {
+            console.error('AI request failed:', error);
+        }
+    }
+}
+```
 
 ---
 
