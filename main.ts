@@ -800,6 +800,8 @@ class AIInterfaceSettingTab extends PluginSettingTab {
             // API Key (only for non-local providers)
             if (!activeService.isLocal) {
                 const apiKeyContainer = containerEl.createDiv();
+                
+                // Add the input setting
                 const apiKeySetting = new Setting(apiKeyContainer)
                     .setName('Api key')
                     .setDesc('Enter the API key for this service')
@@ -810,43 +812,47 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                             .onChange(async (value) => {
                                 activeService.apiKey = value;
                                 await this.plugin.saveSettings();
-                                // Update the masked display after saving
-                                apiKeyDisplay.innerText = AIInterfacePlugin.maskApiKey(value);
+                                // Update the masked display
+                                maskedKeySetting.setDesc(AIInterfacePlugin.maskApiKey(value));
                             });
                         
                         // Hide the actual input value
                         input.inputEl.type = 'password';
                         
                         return input;
-                    });
-
-                // Add masked display of the API key
-                const apiKeyDisplay = apiKeyContainer.createDiv();
-                apiKeyDisplay.style.marginTop = '6px';
-                apiKeyDisplay.style.marginLeft = 'auto'; // Move to the right
-                apiKeyDisplay.style.color = 'var(--text-muted)';
-                apiKeyDisplay.style.position = 'absolute';
-                apiKeyDisplay.style.right = '50px';
-                apiKeyDisplay.style.top = '50%';
-                apiKeyDisplay.style.transform = 'translateY(-50%)';
-                apiKeyDisplay.innerText = AIInterfacePlugin.maskApiKey(activeService.apiKey);
-
-                // Add show/hide toggle button
-                apiKeySetting.addButton(button => button
-                    .setIcon('eye')
-                    .setTooltip('Show/Hide API Key')
-                    .onClick(() => {
-                        const input = apiKeySetting.controlEl.querySelector('input');
-                        if (input) {
-                            if (input.type === 'password') {
-                                input.type = 'text';
-                                button.setIcon('eye-off');
-                            } else {
-                                input.type = 'password';
-                                button.setIcon('eye');
+                    })
+                    .addButton(button => button
+                        .setIcon('eye')
+                        .setTooltip('Show/Hide API Key')
+                        .onClick(() => {
+                            const input = apiKeySetting.controlEl.querySelector('input');
+                            if (input) {
+                                if (input.type === 'password') {
+                                    input.type = 'text';
+                                    button.setIcon('eye-off');
+                                } else {
+                                    input.type = 'password';
+                                    button.setIcon('eye');
+                                }
                             }
-                        }
-                    }));
+                        }));
+
+                // Add masked key display in a separate line
+                const maskedKeySetting = new Setting(apiKeyContainer)
+                    .setName('')
+                    .setDesc(AIInterfacePlugin.maskApiKey(activeService.apiKey));
+                
+                // Style the masked key setting
+                const descEl = maskedKeySetting.descEl;
+                descEl.style.textAlign = 'right';
+                descEl.style.width = '100%';
+                descEl.style.color = 'var(--text-muted)';
+                
+                // Remove the separator line
+                maskedKeySetting.settingEl.style.borderTop = 'none';
+                
+                // Hide the control element since we don't need it
+                maskedKeySetting.controlEl.hide();
             }
 
             // Port Configuration for Local Providers
