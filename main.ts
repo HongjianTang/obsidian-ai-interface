@@ -19,6 +19,7 @@ interface AIInterfaceSettings {
     };
     temperature: number;
     maxTokens: number;
+    timeout: number;
 }
 
 interface AIRequestOptions {
@@ -42,12 +43,13 @@ const DEFAULT_SETTINGS: AIInterfaceSettings = {
             apiKey: '',
             headers: {},
             authType: 'bearer',
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-4-turbo',
             provider: 'openai'
         }
     },
     temperature: 0.7,
-    maxTokens: 2000
+    maxTokens: 2000,
+    timeout: 10000
 };
 
 type ConfigChangeCallback = (settings: AIInterfaceSettings) => void;
@@ -472,31 +474,46 @@ export default class AIInterfacePlugin extends Plugin {
 
             console.log('Request body:', JSON.stringify(body, null, 2));
 
-            const response = await fetch(activeService.url, {
-                method: 'POST',
-                headers,
-                body: JSON.stringify(body)
-            });
+            // Create AbortController for timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), this.settings.timeout);
 
-            console.log('Response status:', response.status);
-            if (!response.ok) {
-                const error = await response.json().catch(() => null);
-                console.error('Error response:', error);
-                throw new Error(error?.error?.message || `HTTP error! status: ${response.status}`);
+            try {
+                const response = await fetch(activeService.url, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify(body),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId); // Clear timeout if request completes
+
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    const error = await response.json().catch(() => null);
+                    console.error('Error response:', error);
+                    throw new Error(error?.error?.message || `HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Response data:', JSON.stringify(data, null, 2));
+
+                const result = this.parseResponse(activeService.provider, data);
+                
+                if (result.error) {
+                    console.error('Parse error:', result.error);
+                    throw new Error(result.error);
+                }
+
+                console.log('Final parsed result:', result.content);
+                return result.content;
+
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    throw new Error(`Request timed out after ${this.settings.timeout / 1000} seconds`);
+                }
+                throw error;
             }
-
-            const data = await response.json();
-            console.log('Response data:', JSON.stringify(data, null, 2));
-
-            const result = this.parseResponse(activeService.provider, data);
-            
-            if (result.error) {
-                console.error('Parse error:', result.error);
-                throw new Error(result.error);
-            }
-
-            console.log('Final parsed result:', result.content);
-            return result.content;
 
         } catch (error) {
             console.error('AI request failed:', error);
@@ -530,10 +547,12 @@ class AIInterfaceSettingTab extends PluginSettingTab {
         switch (provider) {
             case 'openai':
                 models = [
-                    { id: 'gpt-4-turbo', name: 'GPT-4 Turbo' },
-                    { id: 'gpt-4', name: 'GPT-4' },
-                    { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
-                    { id: 'gpt-3.5-turbo-16k', name: 'GPT-3.5 Turbo 16K' }
+                    { id: 'gpt-4o', name: 'GPT-4O' },
+                    { id: 'gpt-4o-mini', name: 'GPT-4O Mini' },
+                    { id: 'o1-mini', name: 'O1 Mini' },
+                    { id: 'o1-preview', name: 'O1 Preview' },
+                    { id: 'o1', name: 'O1' },
+                    { id: 'o3-mini', name: 'O3 Mini' },
                 ];
                 break;
             case 'anthropic':
@@ -990,7 +1009,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                 }));
 
         new Setting(containerEl)
-            .setName('Max Tokens')
+            .setName('Max tokens')
             .setDesc('Maximum length of the response')
             .addText(text => text
                 .setValue(String(this.plugin.settings.maxTokens))
@@ -998,6 +1017,19 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                     const numValue = parseInt(value);
                     if (!isNaN(numValue) && numValue > 0) {
                         this.plugin.settings.maxTokens = numValue;
+                        await this.plugin.saveSettings();
+                    }
+                }));
+
+        new Setting(containerEl)
+            .setName('Request timeout')
+            .setDesc('Maximum time to wait for AI response (in seconds)')
+            .addText(text => text
+                .setValue(String(this.plugin.settings.timeout / 1000))
+                .onChange(async (value) => {
+                    const numValue = parseInt(value);
+                    if (!isNaN(numValue) && numValue > 0) {
+                        this.plugin.settings.timeout = numValue * 1000; // Convert to milliseconds
                         await this.plugin.saveSettings();
                     }
                 }));
