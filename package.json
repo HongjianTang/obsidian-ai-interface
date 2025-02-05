@@ -1,6 +1,6 @@
 {
   "name": "ai-interface",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "AI Interface sets up once then all plugins can use it.",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,8 @@
     "version": "node version-bump.mjs && git add manifest.json versions.json"
   },
   "keywords": ["obsidian", "plugin", "ai"],
-  "author": "",
+  "author": "HJ Tang",
+  "authorUrl": "https://github.com/HongjianTang",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^16.11.6",
