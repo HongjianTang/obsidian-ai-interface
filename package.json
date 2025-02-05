@@ -1,7 +1,7 @@
 {
-  "name": "obsidian-ai-interface",
-  "version": "1.0.0",
-  "description": "An AI interface plugin for Obsidian",
+  "name": "ai-interface",
+  "version": "1.0.1",
+  "description": "AI Interface sets up once then all plugins can use it.",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
