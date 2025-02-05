@@ -1,9 +1,9 @@
 {
-    "id": "obsidian-ai-interface",
+    "id": "ai-interface",
     "name": "AI Interface",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "minAppVersion": "0.15.0",
-    "description": "A plugin that provides a flexible AI interface for Obsidian",
+    "description": "AI Interface sets up once then all plugins can use it.",
     "author": "HJ Tang",
     "authorUrl": "https://github.com/HongjianTang",
     "isDesktopOnly": false
