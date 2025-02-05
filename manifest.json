@@ -1,0 +1,10 @@
+{
+    "id": "obsidian-ai-interface",
+    "name": "AI Interface",
+    "version": "1.0.0",
+    "minAppVersion": "0.15.0",
+    "description": "A plugin that provides a flexible AI interface for Obsidian",
+    "author": "",
+    "authorUrl": "",
+    "isDesktopOnly": false
+} 

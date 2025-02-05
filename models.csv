@@ -1,0 +1,319 @@
+﻿Provider,Model,Path,Input ($/1M tokens),Output ($/1M tokens),Context (tokens),Moderation
+Qwen,Qwen-Turbo,qwen/qwen-turbo,,$0.2,"1,000,000",None
+Qwen,Qwen-Plus,qwen/qwen-plus,,$1.2,"131,072",None
+Qwen,Qwen-Max,qwen/qwen-max,,$6.4,"32,768",None
+OpenAI,o3 Mini,openai/o3-mini,,$4.4,"200,000",Moderated
+DeepSeek,R1 Distill Qwen 1.5B,deepseek/deepseek-r1-distill-qwen-1.5b,,$0.18,"131,072",None
+Mistral,Mistral Small 3,mistralai/mistral-small-24b-instruct-2501,,$0.14,"32,768",None
+DeepSeek,R1 Distill Qwen 32B,deepseek/deepseek-r1-distill-qwen-32b,,$0.18,"131,072",None
+DeepSeek,R1 Distill Qwen 14B,deepseek/deepseek-r1-distill-qwen-14b,,$1.6,"131,072",None
+Perplexity,Sonar Reasoning,perplexity/sonar-reasoning,,$5,"127,000",None
+Perplexity,Sonar,perplexity/sonar,,$1,"127,072",None
+Liquid,LFM 7B,liquid/lfm-7b,,$0.01,"32,768",None
+Liquid,LFM 3B,liquid/lfm-3b,,$0.02,"32,768",None
+DeepSeek,R1 Distill Llama 70B (free),deepseek/deepseek-r1-distill-llama-70b:free,,$0,"8,192",None
+DeepSeek,R1 Distill Llama 70B,deepseek/deepseek-r1-distill-llama-70b,,$0.69,"131,072",None
+Google,Gemini 2.0 Flash Thinking Experimental 01-21 (free),google/gemini-2.0-flash-thinking-exp:free,,$0,"1,048,576",None
+DeepSeek,R1 (free),deepseek/deepseek-r1:free,,$0,"163,840",None
+DeepSeek,R1,deepseek/deepseek-r1,,$2.4,"16,000",None
+DeepSeek,R1 (nitro),deepseek/deepseek-r1:nitro,,$7,"128,000",None
+Other,Rogue Rose 103B v0.2 (free),sophosympatheia/rogue-rose-103b-v0.2:free,,$0,"4,096",None
+MiniMax,MiniMax-01,minimax/minimax-01,,$1.1,"1,000,192",None
+Mistral,Codestral 2501,mistralai/codestral-2501,,$0.9,"256,000",None
+Microsoft,Phi 4,microsoft/phi-4,,$0.14,"16,384",None
+Sao10K,Llama 3.1 70B Hanami x1,sao10k/l3.1-70b-hanami-x1,,$3,"16,000",None
+DeepSeek,DeepSeek V3,deepseek/deepseek-chat,,$0.89,"16,000",None
+Qwen,QvQ 72B Preview,qwen/qvq-72b-preview,,$0.5,"128,000",None
+Google,Gemini 2.0 Flash Thinking Experimental (free),google/gemini-2.0-flash-thinking-exp-1219:free,,$0,"40,000",None
+Sao10K,Llama 3.3 Euryale 70B,sao10k/l3.3-euryale-70b,,$0.8,"131,072",None
+OpenAI,o1,openai/o1,,$60,"200,000",Moderated
+EVA,Llama 3.33 70b,eva-unit-01/eva-llama-3.33-70b,,$6,"16,384",None
+xAI,Grok 2 Vision 1212,x-ai/grok-2-vision-1212,,$10,"32,768",None
+xAI,Grok 2 1212,x-ai/grok-2-1212,,$10,"131,072",None
+Cohere,Command R7B (12-2024),cohere/command-r7b-12-2024,,$0.15,"128,000",None
+Google,Gemini Flash 2.0 Experimental (free),google/gemini-2.0-flash-exp:free,,$0,"1,048,576",None
+Google,Gemini Experimental 1206 (free),google/gemini-exp-1206:free,,$0,"2,097,152",None
+Meta,Llama 3.3 70B Instruct,meta-llama/llama-3.3-70b-instruct,,$0.3,"131,072",None
+Amazon,Nova Lite 1.0,amazon/nova-lite-v1,,$0.24,"300,000",None
+Amazon,Nova Micro 1.0,amazon/nova-micro-v1,,$0.14,"128,000",None
+Amazon,Nova Pro 1.0,amazon/nova-pro-v1,,$3.2,"300,000",None
+Qwen,QwQ 32B Preview,qwen/qwq-32b-preview,,$0.18,"32,768",None
+Google,Gemini Experimental 1121 (free),google/gemini-exp-1121:free,,$0,"40,960",None
+Google,LearnLM 1.5 Pro Experimental (free),google/learnlm-1.5-pro-experimental:free,,$0,"40,960",None
+EVA,Qwen2.5 72B,eva-unit-01/eva-qwen-2.5-72b,,$6,"16,384",None
+OpenAI,GPT-4o (2024-11-20),openai/gpt-4o-2024-11-20,,$10,"128,000",Moderated
+Mistral,Large 2411,mistralai/mistral-large-2411,,$6,"128,000",None
+Mistral,Large 2407,mistralai/mistral-large-2407,,$6,"128,000",None
+Mistral,Pixtral Large 2411,mistralai/pixtral-large-2411,,$6,"128,000",None
+xAI,Grok Vision Beta,x-ai/grok-vision-beta,,$15,"8,192",None
+Google,Gemini Experimental 1114 (free),google/gemini-exp-1114:free,,$0,"40,960",None
+Infermatic,Mistral Nemo Inferor 12B,infermatic/mn-inferor-12b,,$1.2,"16,384",None
+Qwen,Qwen2.5 Coder 32B Instruct,qwen/qwen-2.5-coder-32b-instruct,,$0.16,"33,000",None
+Raifle,SorcererLM 8x22B,raifle/sorcererlm-8x22b,,$4.5,"16,000",None
+EVA,Qwen2.5 32B,eva-unit-01/eva-qwen-2.5-32b,,$3.4,"16,384",None
+,Unslopnemo 12b,thedrummer/unslopnemo-12b,,$0.5,"32,000",None
+Anthropic,Claude 3.5 Haiku (2024-10-22) (self-moderated),anthropic/claude-3.5-haiku-20241022:beta,,$4,"200,000",None
+Anthropic,Claude 3.5 Haiku (2024-10-22),anthropic/claude-3.5-haiku-20241022,,$4,"200,000",Moderated
+Anthropic,Claude 3.5 Haiku (self-moderated),anthropic/claude-3.5-haiku:beta,,$4,"200,000",None
+Anthropic,Claude 3.5 Haiku,anthropic/claude-3.5-haiku,,$4,"200,000",Moderated
+NeverSleep,Lumimaid v0.2 70B,neversleep/llama-3.1-lumimaid-70b,,$4.5,"16,384",None
+,Magnum v4 72B,anthracite-org/magnum-v4-72b,,$2.25,"16,384",None
+Anthropic,Claude 3.5 Sonnet (self-moderated),anthropic/claude-3.5-sonnet:beta,,$15,"200,000",None
+Anthropic,Claude 3.5 Sonnet,anthropic/claude-3.5-sonnet,,$15,"200,000",Moderated
+xAI,Grok Beta,x-ai/grok-beta,,$15,"131,072",None
+Mistral,Ministral 8B,mistralai/ministral-8b,,$0.1,"128,000",None
+Mistral,Ministral 3B,mistralai/ministral-3b,,$0.04,"128,000",None
+Qwen,Qwen2.5 7B Instruct,qwen/qwen-2.5-7b-instruct,,$0.05,"32,768",None
+NVIDIA,Llama 3.1 Nemotron 70B Instruct (free),nvidia/llama-3.1-nemotron-70b-instruct:free,,$0,"131,072",None
+NVIDIA,Llama 3.1 Nemotron 70B Instruct,nvidia/llama-3.1-nemotron-70b-instruct,,$0.3,"131,000",None
+Inflection,Inflection 3 Pi,inflection/inflection-3-pi,,$10,"8,000",None
+Inflection,Inflection 3 Productivity,inflection/inflection-3-productivity,,$10,"8,000",None
+Google,Gemini Flash 1.5 8B,google/gemini-flash-1.5-8b,,$0.15,"1,000,000",None
+,Magnum v2 72B,anthracite-org/magnum-v2-72b,,$3,"32,768",None
+Liquid,LFM 40B MoE,liquid/lfm-40b,,$0.15,"32,768",None
+,Rocinante 12B,thedrummer/rocinante-12b,,$0.5,"32,768",None
+Meta,Llama 3.2 3B Instruct (free),meta-llama/llama-3.2-3b-instruct:free,,$0,"4,096",None
+Meta,Llama 3.2 3B Instruct,meta-llama/llama-3.2-3b-instruct,,$0.025,"131,000",None
+Meta,Llama 3.2 1B Instruct (free),meta-llama/llama-3.2-1b-instruct:free,,$0,"4,096",None
+Meta,Llama 3.2 1B Instruct,meta-llama/llama-3.2-1b-instruct,,$0.01,"131,072",None
+Meta,Llama 3.2 90B Vision Instruct (free),meta-llama/llama-3.2-90b-vision-instruct:free,,$0,"4,096",None
+Meta,Llama 3.2 90B Vision Instruct,meta-llama/llama-3.2-90b-vision-instruct,,$0.9,"131,072",None
+Meta,Llama 3.2 11B Vision Instruct (free),meta-llama/llama-3.2-11b-vision-instruct:free,,$0,"131,072",None
+Meta,Llama 3.2 11B Vision Instruct,meta-llama/llama-3.2-11b-vision-instruct,,$0.055,"131,072",None
+,Qwen2.5 72B Instruct,qwen/qwen-2.5-72b-instruct,,$0.4,"128,000",None
+,Qwen2-VL 72B Instruct,qwen/qwen-2-vl-72b-instruct,,$0.4,"4,096",None
+NeverSleep,Lumimaid v0.2 8B,neversleep/llama-3.1-lumimaid-8b,,$1.125,"32,768",None
+OpenAI,o1-mini (2024-09-12),openai/o1-mini-2024-09-12,,$4.4,"128,000",Moderated
+OpenAI,o1-preview,openai/o1-preview,,$60,"128,000",Moderated
+OpenAI,o1-preview (2024-09-12),openai/o1-preview-2024-09-12,,$60,"128,000",Moderated
+OpenAI,o1-mini,openai/o1-mini,,$4.4,"128,000",Moderated
+Mistral,Pixtral 12B,mistralai/pixtral-12b,,$0.1,"4,096",None
+Cohere,Command R (08-2024),cohere/command-r-08-2024,,$0.57,"128,000",None
+Cohere,Command R+ (08-2024),cohere/command-r-plus-08-2024,,$9.5,"128,000",None
+,Qwen2-VL 7B Instruct,qwen/qwen-2-vl-7b-instruct,,$0.1,"4,096",None
+Google,Gemini Flash 1.5 Experimental (free),google/gemini-flash-1.5-exp:free,,$0,"1,000,000",None
+Google,Gemini Flash 1.5 Experimental,google/gemini-flash-1.5-exp,,$0,"1,000,000",None
+Sao10K,Llama 3.1 Euryale 70B v2.2,sao10k/l3.1-euryale-70b,,$0.8,"131,072",None
+Google,Gemini Flash 1.5 8B Experimental,google/gemini-flash-1.5-8b-exp,,$0,"1,000,000",None
+AI21,Jamba 1.5 Large,ai21/jamba-1-5-large,,$8,"256,000",None
+AI21,Jamba 1.5 Mini,ai21/jamba-1-5-mini,,$0.4,"256,000",None
+Microsoft,Phi-3.5 Mini 128K Instruct,microsoft/phi-3.5-mini-128k-instruct,,$0.1,"128,000",None
+Nous,Hermes 3 70B Instruct,nousresearch/hermes-3-llama-3.1-70b,,$0.3,"131,000",None
+Nous,Hermes 3 405B Instruct,nousresearch/hermes-3-llama-3.1-405b,,$0.8,"131,000",None
+Perplexity,Llama 3.1 Sonar 405B Online,perplexity/llama-3.1-sonar-huge-128k-online,,$5,"127,072",None
+OpenAI,ChatGPT-4o,openai/chatgpt-4o-latest,,$15,"128,000",Moderated
+Sao10K,Llama 3 8B Lunaris,sao10k/l3-lunaris-8b,,$0.06,"8,192",None
+Aetherwiing,Starcannon 12B,aetherwiing/mn-starcannon-12b,,$1.2,"16,384",None
+OpenAI,GPT-4o (2024-08-06),openai/gpt-4o-2024-08-06,,$10,"128,000",Moderated
+Meta,Llama 3.1 405B (base),meta-llama/llama-3.1-405b,,$2,"32,768",None
+,Mistral Nemo 12B Celeste,nothingiisreal/mn-celeste-12b,,$1.2,"16,384",None
+Perplexity,Llama 3.1 Sonar 8B,perplexity/llama-3.1-sonar-small-128k-chat,,$0.2,"131,072",None
+Google,Gemini Pro 1.5 Experimental,google/gemini-pro-1.5-exp,,$0,"1,000,000",None
+Perplexity,Llama 3.1 Sonar 70B,perplexity/llama-3.1-sonar-large-128k-chat,,$1,"131,072",None
+Perplexity,Llama 3.1 Sonar 70B Online,perplexity/llama-3.1-sonar-large-128k-online,,$1,"127,072",None
+Perplexity,Llama 3.1 Sonar 8B Online,perplexity/llama-3.1-sonar-small-128k-online,,$0.2,"127,072",None
+Meta,Llama 3.1 405B Instruct (free),meta-llama/llama-3.1-405b-instruct:free,,$0,"8,000",None
+Meta,Llama 3.1 405B Instruct,meta-llama/llama-3.1-405b-instruct,,$0.8,"32,768",None
+Meta,Llama 3.1 405B Instruct (nitro),meta-llama/llama-3.1-405b-instruct:nitro,,$14.62,"8,000",None
+Meta,Llama 3.1 8B Instruct (free),meta-llama/llama-3.1-8b-instruct:free,,$0,"8,192",None
+Meta,Llama 3.1 8B Instruct,meta-llama/llama-3.1-8b-instruct,,$0.05,"131,072",None
+Meta,Llama 3.1 8B Instruct (nitro),meta-llama/llama-3.1-8b-instruct:nitro,,$0.18,"131,072",None
+Meta,Llama 3.1 70B Instruct (free),meta-llama/llama-3.1-70b-instruct:free,,$0,"8,192",None
+Meta,Llama 3.1 70B Instruct,meta-llama/llama-3.1-70b-instruct,,$0.3,"131,072",None
+Meta,Llama 3.1 70B Instruct (nitro),meta-llama/llama-3.1-70b-instruct:nitro,,$3.25,"64,000",None
+Mistral,Mistral Nemo,mistralai/mistral-nemo,,$0.08,"131,072",None
+Mistral,Codestral Mamba,mistralai/codestral-mamba,,$0.25,"256,000",None
+OpenAI,GPT-4o-mini,openai/gpt-4o-mini,,$0.6,"128,000",Moderated
+OpenAI,GPT-4o-mini (2024-07-18),openai/gpt-4o-mini-2024-07-18,,$0.6,"128,000",Moderated
+,Qwen 2 7B Instruct (free),qwen/qwen-2-7b-instruct:free,,$0,"8,192",None
+,Qwen 2 7B Instruct,qwen/qwen-2-7b-instruct,,$0.054,"32,768",None
+Google,Gemma 2 27B,google/gemma-2-27b-it,,$0.27,"8,192",None
+,Magnum 72B,alpindale/magnum-72b,,$2.25,"16,384",None
+Google,Gemma 2 9B (free),google/gemma-2-9b-it:free,,$0,"8,192",None
+Google,Gemma 2 9B,google/gemma-2-9b-it,,$0.06,"8,192",None
+01.AI,Yi Large,01-ai/yi-large,,$3,"32,768",None
+AI21,Jamba Instruct,ai21/jamba-instruct,,$0.7,"256,000",None
+Anthropic,Claude 3.5 Sonnet (2024-06-20) (self-moderated),anthropic/claude-3.5-sonnet-20240620:beta,,$15,"200,000",None
+Anthropic,Claude 3.5 Sonnet (2024-06-20),anthropic/claude-3.5-sonnet-20240620,,$15,"200,000",Moderated
+Sao10k,Llama 3 Euryale 70B v2.1,sao10k/l3-euryale-70b,,$0.8,"8,192",None
+,Dolphin 2.9.2 Mixtral 8x22B,cognitivecomputations/dolphin-mixtral-8x22b,,$0.9,"16,000",None
+,Qwen 2 72B Instruct,qwen/qwen-2-72b-instruct,,$0.39,"32,768",None
+Mistral,Mistral 7B Instruct (free),mistralai/mistral-7b-instruct:free,,$0,"8,192",None
+Mistral,Mistral 7B Instruct,mistralai/mistral-7b-instruct,,$0.055,"32,768",None
+Mistral,Mistral 7B Instruct (nitro),mistralai/mistral-7b-instruct:nitro,,$0.07,"32,768",None
+Mistral,Mistral 7B Instruct v0.3,mistralai/mistral-7b-instruct-v0.3,,$0.055,"32,768",None
+NousResearch,Hermes 2 Pro - Llama-3 8B,nousresearch/hermes-2-pro-llama-3-8b,,$0.04,"131,000",None
+Microsoft,Phi-3 Mini 128K Instruct (free),microsoft/phi-3-mini-128k-instruct:free,,$0,"8,192",None
+Microsoft,Phi-3 Mini 128K Instruct,microsoft/phi-3-mini-128k-instruct,,$0.1,"128,000",None
+Microsoft,Phi-3 Medium 128K Instruct (free),microsoft/phi-3-medium-128k-instruct:free,,$0,"8,192",None
+Microsoft,Phi-3 Medium 128K Instruct,microsoft/phi-3-medium-128k-instruct,,$1,"128,000",None
+NeverSleep,Llama 3 Lumimaid 70B,neversleep/llama-3-lumimaid-70b,,$4.5,"8,192",None
+Google,Gemini Flash 1.5,google/gemini-flash-1.5,,$0.3,"1,000,000",None
+,DeepSeek V2.5,deepseek/deepseek-chat-v2.5,,$2,"8,192",None
+OpenAI,GPT-4o (2024-05-13),openai/gpt-4o-2024-05-13,,$15,"128,000",Moderated
+Meta,LlamaGuard 2 8B,meta-llama/llama-guard-2-8b,,$0.2,"8,192",None
+OpenAI,GPT-4o,openai/gpt-4o,,$10,"128,000",Moderated
+OpenAI,GPT-4o (extended),openai/gpt-4o:extended,,$18,"128,000",Moderated
+NeverSleep,Llama 3 Lumimaid 8B (extended),neversleep/llama-3-lumimaid-8b:extended,,$1.125,"24,576",None
+NeverSleep,Llama 3 Lumimaid 8B,neversleep/llama-3-lumimaid-8b,,$1.125,"24,576",None
+,Fimbulvetr 11B v2,sao10k/fimbulvetr-11b-v2,,$1.2,"4,096",None
+Meta,Llama 3 8B Instruct (free),meta-llama/llama-3-8b-instruct:free,,$0,"8,192",None
+Meta,Llama 3 8B Instruct,meta-llama/llama-3-8b-instruct,,$0.06,"8,192",None
+Meta,Llama 3 8B Instruct (extended),meta-llama/llama-3-8b-instruct:extended,,$1.125,"16,384",None
+Meta,Llama 3 8B Instruct (nitro),meta-llama/llama-3-8b-instruct:nitro,,$0.2,"8,192",None
+Meta,Llama 3 70B Instruct,meta-llama/llama-3-70b-instruct,,$0.4,"8,192",None
+Meta,Llama 3 70B Instruct (nitro),meta-llama/llama-3-70b-instruct:nitro,,$0.88,"8,192",None
+Mistral,Mixtral 8x22B Instruct,mistralai/mixtral-8x22b-instruct,,$0.9,"65,536",None
+,WizardLM-2 8x22B,microsoft/wizardlm-2-8x22b,,$0.5,"65,536",None
+,WizardLM-2 7B,microsoft/wizardlm-2-7b,,$0.07,"32,000",None
+Google,Gemini Pro 1.5,google/gemini-pro-1.5,,$5,"2,000,000",None
+OpenAI,GPT-4 Turbo,openai/gpt-4-turbo,,$30,"128,000",Moderated
+Cohere,Command R+,cohere/command-r-plus,,$14.25,"128,000",None
+Cohere,Command R+ (04-2024),cohere/command-r-plus-04-2024,,$14.25,"128,000",None
+Databricks,DBRX 132B Instruct,databricks/dbrx-instruct,,$1.2,"32,768",None
+,Midnight Rose 70B,sophosympatheia/midnight-rose-70b,,$0.8,"4,096",None
+Cohere,Command,cohere/command,,$1.9,"4,096",None
+Cohere,Command R,cohere/command-r,,$1.425,"128,000",None
+Anthropic,Claude 3 Haiku (self-moderated),anthropic/claude-3-haiku:beta,,$1.25,"200,000",None
+Anthropic,Claude 3 Haiku,anthropic/claude-3-haiku,,$1.25,"200,000",Moderated
+Anthropic,Claude 3 Opus (self-moderated),anthropic/claude-3-opus:beta,,$75,"200,000",None
+Anthropic,Claude 3 Opus,anthropic/claude-3-opus,,$75,"200,000",Moderated
+Anthropic,Claude 3 Sonnet (self-moderated),anthropic/claude-3-sonnet:beta,,$15,"200,000",None
+Anthropic,Claude 3 Sonnet,anthropic/claude-3-sonnet,,$15,"200,000",Moderated
+Cohere,Command R (03-2024),cohere/command-r-03-2024,,$1.425,"128,000",None
+Mistral,Large,mistralai/mistral-large,,$6,"128,000",None
+Google,Gemma 7B,google/gemma-7b-it,,$0.15,"8,192",None
+OpenAI,GPT-3.5 Turbo (older v0613),openai/gpt-3.5-turbo-0613,,$2,"4,095",None
+OpenAI,GPT-4 Turbo Preview,openai/gpt-4-turbo-preview,,$30,"128,000",Moderated
+Nous,Hermes 2 Mixtral 8x7B DPO,nousresearch/nous-hermes-2-mixtral-8x7b-dpo,,$0.6,"32,768",None
+Mistral,Small,mistralai/mistral-small,,$0.6,"32,000",None
+Mistral,Tiny,mistralai/mistral-tiny,,$0.25,"32,000",None
+Mistral,Medium,mistralai/mistral-medium,,$8.1,"32,000",None
+,Dolphin 2.6 Mixtral 8x7B,cognitivecomputations/dolphin-mixtral-8x7b,,$0.5,"32,768",None
+Google,Gemini Pro Vision 1.0,google/gemini-pro-vision,,$1.5,"16,384",None
+Google,Gemini Pro 1.0,google/gemini-pro,,$1.5,"32,760",None
+Mistral,Mixtral 8x7B (base),mistralai/mixtral-8x7b,,$0.6,"32,768",None
+Mistral,Mixtral 8x7B Instruct,mistralai/mixtral-8x7b-instruct,,$0.24,"32,768",None
+Mistral,Mixtral 8x7B Instruct (nitro),mistralai/mixtral-8x7b-instruct:nitro,,$0.5,"32,768",None
+,OpenChat 3.5 7B (free),openchat/openchat-7b:free,,$0,"8,192",None
+,OpenChat 3.5 7B,openchat/openchat-7b,,$0.055,"8,192",None
+,Noromaid 20B,neversleep/noromaid-20b,,$2.25,"8,192",None
+Anthropic,Claude v2 (self-moderated),anthropic/claude-2:beta,,$24,"200,000",None
+Anthropic,Claude v2,anthropic/claude-2,,$24,"200,000",Moderated
+Anthropic,Claude v2.1 (self-moderated),anthropic/claude-2.1:beta,,$24,"200,000",None
+Anthropic,Claude v2.1,anthropic/claude-2.1,,$24,"200,000",Moderated
+,OpenHermes 2.5 Mistral 7B,teknium/openhermes-2.5-mistral-7b,,$0.17,"4,096",None
+,Toppy M 7B (free),undi95/toppy-m-7b:free,,$0,"4,096",None
+,Toppy M 7B (nitro),undi95/toppy-m-7b:nitro,,$0.07,"4,096",None
+,Toppy M 7B,undi95/toppy-m-7b,,$0.07,"4,096",None
+,Goliath 120B,alpindale/goliath-120b,,$9.375,"6,144",None
+OpenAI,GPT-3.5 Turbo 16k (older v1106),openai/gpt-3.5-turbo-1106,,$2,"16,385",Moderated
+OpenAI,GPT-4 Turbo (older v1106),openai/gpt-4-1106-preview,,$30,"128,000",Moderated
+Google,PaLM 2 Chat 32k,google/palm-2-chat-bison-32k,,$2,"32,768",None
+Google,PaLM 2 Code Chat 32k,google/palm-2-codechat-bison-32k,,$2,"32,768",None
+Airoboros 70B,,jondurbin/airoboros-l2-70b,,$0.5,"4,000",None
+Xwin 70B,,xwin-lm/xwin-lm-70b,,$3.75,"8,192",None
+OpenAI,GPT-3.5 Turbo Instruct,openai/gpt-3.5-turbo-instruct,,$2,"4,095",Moderated
+Mistral,Mistral 7B Instruct v0.1,mistralai/mistral-7b-instruct-v0.1,,$0.2,"32,768",None
+Pygmalion,Mythalion 13B,pygmalionai/mythalion-13b,,$1.2,"4,096",None
+OpenAI,GPT-3.5 Turbo 16k,openai/gpt-3.5-turbo-16k,,$4,"16,385",Moderated
+OpenAI,GPT-4 32k,openai/gpt-4-32k,,$120,"32,767",Moderated
+OpenAI,GPT-4 32k (older v0314),openai/gpt-4-32k-0314,,$120,"32,767",Moderated
+Nous,Hermes 13B,nousresearch/nous-hermes-llama2-13b,,$0.17,"4,096",None
+Mancer,Weaver (alpha),mancer/weaver,,$2.25,"8,000",None
+Hugging Face,Zephyr 7B (free),huggingfaceh4/zephyr-7b-beta:free,,$0,"4,096",None
+Anthropic,Claude v2.0 (self-moderated),anthropic/claude-2.0:beta,,$24,"100,000",None
+Anthropic,Claude v2.0,anthropic/claude-2.0,,$24,"100,000",Moderated
+,ReMM SLERP 13B,undi95/remm-slerp-l2-13b,,$1.2,"4,096",None
+,ReMM SLERP 13B (extended),undi95/remm-slerp-l2-13b:extended,,$1.125,"6,144",None
+Google,PaLM 2 Chat,google/palm-2-chat-bison,,$2,"9,216",None
+Google,PaLM 2 Code Chat,google/palm-2-codechat-bison,,$2,"7,168",None
+,MythoMax 13B (free),gryphe/mythomax-l2-13b:free,,$0,"4,096",None
+,MythoMax 13B,gryphe/mythomax-l2-13b,,$0.065,"4,096",None
+,MythoMax 13B (nitro),gryphe/mythomax-l2-13b:nitro,,$0.2,"4,096",None
+,MythoMax 13B (extended),gryphe/mythomax-l2-13b:extended,,$1.125,"8,192",None
+Meta,Llama 2 13B Chat,meta-llama/llama-2-13b-chat,,$0.22,"4,096",None
+Meta,Llama 2 70B Chat,meta-llama/llama-2-70b-chat,,$0.9,"4,096",None
+OpenAI,GPT-3.5 Turbo,openai/gpt-3.5-turbo,,$1.5,"16,385",Moderated
+OpenAI,GPT-3.5 Turbo 16k,openai/gpt-3.5-turbo-0125,,$1.5,"16,385",Moderated
+OpenAI,GPT-4,openai/gpt-4,,$60,"8,191",Moderated
+OpenAI,GPT-4 (older v0314),openai/gpt-4-0314,,$60,"8,191",Moderated
+Inflatebot,Mag Mell R1 12B,inflatebot/mn-mag-mell-r1,,--,"32,000",--
+xAI,Grok 2,x-ai/grok-2,,--,"32,768",--
+xAI,Grok 2 mini,x-ai/grok-2-mini,,--,"32,768",--
+,EVA Qwen2.5 14B,eva-unit-01/eva-qwen-2.5-14b,,--,"32,768",--
+,Reflection 70B,mattshumer/reflection-70b,,--,"131,072",--
+Lynn,Llama 3 Soliloquy 7B v3 32K,lynn/soliloquy-v3,,--,"32,768",--
+01.AI,Yi 1.5 34B Chat,01-ai/yi-1.5-34b-chat,,--,"4,096",--
+01.AI,Yi Large Turbo,01-ai/yi-large-turbo,,--,"4,096",--
+01.AI,Yi Large FC,01-ai/yi-large-fc,,--,"16,384",--
+01.AI,Yi Vision,01-ai/yi-vision,,--,"16,384",--
+,Dolphin Llama 3 70B 🐬,cognitivecomputations/dolphin-llama-3-70b,,--,"8,192",--
+Nous,Hermes 2 Theta 8B,nousresearch/hermes-2-theta-llama-3-8b,,--,"16,384",--
+Sao10K,Llama 3 Stheno 8B v3.3 32K,sao10k/l3-stheno-8b,,--,"32,000",--
+NVIDIA,Nemotron-4 340B Instruct,nvidia/nemotron-4-340b-instruct,,--,"4,096",--
+Microsoft,Phi-3 Medium 4K Instruct,microsoft/phi-3-medium-4k-instruct,,--,"4,000",--
+,StarCoder2 15B Instruct,bigcode/starcoder2-15b-instruct,,--,"16,384",--
+,OpenChat 3.6 8B,openchat/openchat-8b,,--,"8,192",--
+,DeepSeek-Coder-V2,deepseek/deepseek-coder,,--,"128,000",--
+Perplexity,Llama3 Sonar 70B,perplexity/llama-3-sonar-large-32k-chat,,--,"32,768",--
+Perplexity,Llama3 Sonar 70B Online,perplexity/llama-3-sonar-large-32k-online,,--,"28,000",--
+Perplexity,Llama3 Sonar 8B,perplexity/llama-3-sonar-small-32k-chat,,--,"32,768",--
+Perplexity,Llama3 Sonar 8B Online,perplexity/llama-3-sonar-small-32k-online,,--,"28,000",--
+Meta,Llama 3 8B (Base),meta-llama/llama-3-8b,,--,"8,192",--
+Meta,Llama 3 70B (Base),meta-llama/llama-3-70b,,--,"8,192",--
+,LLaVA v1.6 34B,liuhaotian/llava-yi-34b,,--,"4,096",--
+,OLMo 7B Instruct,allenai/olmo-7b-instruct,,--,"2,048",--
+,Qwen 1.5 110B Chat,qwen/qwen-110b-chat,,--,"32,768",--
+,Qwen 1.5 72B Chat,qwen/qwen-72b-chat,,--,"32,768",--
+,Qwen 1.5 32B Chat,qwen/qwen-32b-chat,,--,"32,768",--
+,Qwen 1.5 14B Chat,qwen/qwen-14b-chat,,--,"32,768",--
+,Qwen 1.5 7B Chat,qwen/qwen-7b-chat,,--,"32,768",--
+,Qwen 1.5 4B Chat,qwen/qwen-4b-chat,,--,"32,768",--
+Snowflake,Arctic Instruct,snowflake/snowflake-arctic-instruct,,--,"4,096",--
+Fireworks,FireLLaVA 13B,fireworks/firellava-13b,,--,"4,096",--
+Lynn,Llama 3 Soliloquy 8B v2,lynn/soliloquy-l3,,--,"24,576",--
+,Zephyr 141B-A35B,huggingfaceh4/zephyr-orpo-141b-a35b,,--,"65,536",--
+Mistral,Mixtral 8x22B (base),mistralai/mixtral-8x22b,,--,"65,536",--
+Nous,Hermes 2 Mistral 7B DPO,nousresearch/nous-hermes-2-mistral-7b-dpo,,--,"8,192",--
+Meta,CodeLlama 70B Instruct,meta-llama/codellama-70b-instruct,,--,"2,048",--
+,RWKV v5: Eagle 7B,recursal/eagle-7b,,--,"10,000",--
+,Yi 34B 200K,01-ai/yi-34b-200k,,--,"200,000",--
+Nous,Hermes 2 Mixtral 8x7B SFT,nousresearch/nous-hermes-2-mixtral-8x7b-sft,,--,"32,768",--
+,Chronos Hermes 13B v2,austism/chronos-hermes-13b,,--,"4,096",--
+,Bagel 34B v0.2,jondurbin/bagel-34b,,--,"200,000",--
+,Noromaid Mixtral 8x7B Instruct,neversleep/noromaid-mixtral-8x7b-instruct,,--,"8,000",--
+Nous,Hermes 2 Yi 34B,nousresearch/nous-hermes-yi-34b,,--,"4,096",--
+Mistral,Mistral 7B Instruct v0.2,mistralai/mistral-7b-instruct-v0.2,,--,"32,768",--
+,RWKV v5 World 3B,rwkv/rwkv-5-world-3b,,--,"10,000",--
+,RWKV v5 3B AI Town,recursal/rwkv-5-3b-ai-town,,--,"10,000",--
+,StripedHyena Nous 7B,togethercomputer/stripedhyena-nous-7b,,--,"32,768",--
+,StripedHyena Hessian 7B (base),togethercomputer/stripedhyena-hessian-7b,,--,"32,768",--
+,Psyfighter v2 13B,koboldai/psyfighter-13b-2,,--,"4,096",--
+,Yi 34B Chat,01-ai/yi-34b-chat,,--,"4,096",--
+,Yi 34B (base),01-ai/yi-34b,,--,"4,096",--
+,Yi 6B (base),01-ai/yi-6b,,--,"4,096",--
+,MythoMist 7B,gryphe/mythomist-7b,,--,"32,768",--
+Nous,Hermes 2 Vision 7B (alpha),nousresearch/nous-hermes-2-vision-7b,,--,"4,096",--
+,Cinematika 7B (alpha),openrouter/cinematika-7b,,--,"8,000",--
+Nous,Capybara 7B,nousresearch/nous-capybara-7b,,--,"8,192",--
+,Psyfighter 13B,jebcarter/psyfighter-13b,,--,"4,096",--
+,Neural Chat 7B v3.1,intel/neural-chat-7b,,--,"4,096",--
+Anthropic,Claude Instant v1.1,anthropic/claude-instant-1.1,,--,"100,000",--
+,LLaVA 13B,liuhaotian/llava-13b,,--,"2,048",--
+Nous,Capybara 34B,nousresearch/nous-capybara-34b,,--,"200,000",--
+OpenAI,GPT-4 Vision,openai/gpt-4-vision-preview,,--,"128,000",--
+,lzlv 70B,lizpreciatior/lzlv-70b-fp16-hf,,--,"4,096",--
+,Auto Router,openrouter/auto,,--,"2,000,000",--
+,OpenHermes 2 Mistral 7B,teknium/openhermes-2-mistral-7b,,--,"8,192",--
+,Mistral OpenOrca 7B,open-orca/mistral-7b-openorca,,--,"8,192",--
+Nous,Hermes 70B,nousresearch/nous-hermes-llama2-70b,,--,"4,096",--
+,Synthia 70B,migtissera/synthia-70b,,--,"8,192",--
+Meta,CodeLlama 34B Instruct,meta-llama/codellama-34b-instruct,,--,"8,192",--
+Phind,CodeLlama 34B v2,phind/phind-codellama-34b,,--,"4,096",--
+Anthropic,Claude Instant v1,anthropic/claude-instant-1,,--,"100,000",--
+Anthropic,Claude v1,anthropic/claude-1,,--,"100,000",--
+Anthropic,Claude v1.2,anthropic/claude-1.2,,--,"100,000",--
+Anthropic,Claude Instant v1.0,anthropic/claude-instant-1.0,,--,"100,000",--
+OpenAI,Shap-e,openai/shap-e,,--,"2,048",--
+OpenAI,GPT-3.5 Turbo (older v0301),openai/gpt-3.5-turbo-0301,,--,"4,095",--
