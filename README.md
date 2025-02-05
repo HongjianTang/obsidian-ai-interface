@@ -5,21 +5,21 @@
 
 ## Tired of Repeating AI Configurations?
 
-Are you a user fed up with setting up models and API keys in countless plugins?
+Are you tired of setting up models and API keys in every single plugin?
 
-Are you a developer frustrated by having to maintain separate infrastructures for each plugin—updating model lists, supporting local models, and handling custom endpoints?
+Are you a developer annoyed by having to build and update a separate system for each plugin—keeping track of model lists, local setups, and custom endpoints?
 
-If so, give **AI Interface** a try. It’s a simple, centralized solution that streamlines AI/LLM service integration for Obsidian.
+If so, check out AI Interface. It’s a one-stop solution that simplifies all your AI/LLM settings for Obsidian.
 
 ## What It Does
 
-- **Central Setup**: Configure API keys, select models, and set custom endpoints all in one place.
+- **One Plugin, One Configuration**: Set everything up in a single plugin, one single truth.
 
-- **Flexible Integration**: Easily connect to various AI services with support for custom endpoints beyond the defaults (e.g., OpenRouter, Azure, or local models).
+- **Unified Settings for All Plugins**: No more repetitive setups—once you've configured AI Interface, all other plugins will use the same settings.
 
-- **Shared API Access**: Once configured, other plugins can use these settings via a built-in API—no redundant setup needed.
+- **Flexible Integration**: Support for custom endpoints, local LLMs, and the ability to auto adjust request and response formats based on the model.
 
-- **Secure and Easy**: Manage your sensitive credentials securely with encryption, all within an interface designed to match Obsidian’s style.
+- **Safe and Simple**: Your API keys and sensitive data are securely encrypted, and the interface is designed to be easy to use.
 
 ### Screenshot
 
