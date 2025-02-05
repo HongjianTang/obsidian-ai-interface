@@ -36,7 +36,6 @@ PS: It's still under review, so you need to install it manually for now.
 3. Search for "AI Interface" and click Install
 4. Enable the plugin in Community plugins
 5. Set up your API key in plugin settings
-
 6. Restart Obsidian
 
 ### Manual Installation
@@ -47,6 +46,14 @@ PS: It's still under review, so you need to install it manually for now.
 4. Enable the plugin in Obsidian settings
 5. Set up your API key in plugin settings
 6. Restart Obsidian
+
+## Usage
+
+- Click "Add service" to add a new service, the new service will be auto selected as the active service
+- Rename service to your desired name
+- Change the provider, api key, model, etc.
+- It would auto save the changes
+- If you want to change the active service, you can click the dropdown menu to select the new active service
 
 ## Developer API
 
