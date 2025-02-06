@@ -279,9 +279,6 @@ export default class AIInterfacePlugin extends Plugin {
 
     private parseResponse(provider: AIServiceConfig['provider'], data: any): AIResponse {
         try {
-            console.log('Parsing response for provider:', provider);
-            console.log('Raw response data:', JSON.stringify(data, null, 2));
-
             switch (provider) {
                 case 'openai':
                     return {
@@ -333,41 +330,30 @@ export default class AIInterfacePlugin extends Plugin {
                     };
 
                 case 'custom':
-                    console.log('Attempting to parse custom provider response');
                     // Try different common response formats
                     if (data.choices?.[0]?.message?.content) {
-                        console.log('Found OpenAI-like response format');
                         return { content: data.choices[0].message.content.trim() };
                     }
                     if (data.output?.text) {
-                        console.log('Found output.text format');
                         return { content: data.output.text.trim() };
                     }
                     if (data.response) {
-                        console.log('Found direct response format');
                         return { content: data.response.trim() };
                     }
                     if (data.message?.content) {
-                        console.log('Found message.content format');
                         return { content: data.message.content.trim() };
                     }
                     if (data.text || data.content) {
-                        console.log('Found text/content format');
                         return { content: (data.text || data.content).trim() };
                     }
-                    // For OpenRouter specific format
                     if (data.choices?.[0]?.content) {
-                        console.log('Found OpenRouter format');
                         return { content: data.choices[0].content.trim() };
                     }
-                    // For OpenRouter alternative format
                     if (data.choices?.[0]?.text) {
-                        console.log('Found OpenRouter alternative format');
                         return { content: data.choices[0].text.trim() };
                     }
 
-                    console.log('No known response format found');
-                    console.log('Available response properties:', Object.keys(data));
+                    console.error('No known response format found. Response keys:', Object.keys(data));
                     throw new Error('Unable to parse response format');
 
                 default:
@@ -384,8 +370,7 @@ export default class AIInterfacePlugin extends Plugin {
                     throw new Error('Unable to parse response format');
             }
         } catch (error) {
-            console.error('Error parsing response:', error);
-            console.error('Failed response data:', JSON.stringify(data, null, 2));
+            console.error('Response parsing error:', error.message);
             return {
                 content: '',
                 error: 'Failed to parse response: ' + error.message
@@ -394,20 +379,17 @@ export default class AIInterfacePlugin extends Plugin {
     }
 
     async invokeAI(prompt: string, options: Partial<AIRequestOptions> = {}): Promise<string> {
-        console.log('Invoking AI with options:', JSON.stringify(options, null, 2));
         let activeService = this.settings.services[this.settings.activeService];
-        console.log('Initial service:', JSON.stringify(activeService, null, 2));
 
         // If a specific model is requested and the current service doesn't have it,
         // try to find another service that has this model
         if (options.model && options.model !== activeService.model) {
-            console.log('Looking for service with model:', options.model);
             const serviceWithModel = Object.entries(this.settings.services).find(([_, service]) => 
                 service.model === options.model
             );
 
             if (serviceWithModel) {
-                console.log('Found alternative service with requested model:', serviceWithModel[0]);
+                console.log('Using alternative service for model:', options.model);
                 activeService = serviceWithModel[1];
             }
         }
@@ -439,7 +421,6 @@ export default class AIInterfacePlugin extends Plugin {
                 switch (activeService.authType) {
                     case 'bearer':
                         headers['Authorization'] = `Bearer ${activeService.apiKey}`;
-                        // Special handling for OpenRouter
                         if (activeService.url.includes('openrouter.ai')) {
                             headers['HTTP-Referer'] = 'http://localhost:8080';
                             headers['X-Title'] = 'Obsidian AI Interface';
@@ -454,15 +435,9 @@ export default class AIInterfacePlugin extends Plugin {
                             headers['api-key'] = activeService.apiKey;
                         }
                         break;
-                    case 'custom':
-                        // Custom headers are already merged above
-                        break;
                 }
             }
 
-            console.log('Request headers:', JSON.stringify(headers, null, 2));
-
-            // Format request body according to provider
             const body = this.formatRequestBody(
                 activeService.provider,
                 model,
@@ -471,8 +446,6 @@ export default class AIInterfacePlugin extends Plugin {
                 temperature,
                 maxTokens
             );
-
-            console.log('Request body:', JSON.stringify(body, null, 2));
 
             // Create AbortController for timeout
             const controller = new AbortController();
@@ -486,26 +459,21 @@ export default class AIInterfacePlugin extends Plugin {
                     signal: controller.signal
                 });
 
-                clearTimeout(timeoutId); // Clear timeout if request completes
+                clearTimeout(timeoutId);
 
-                console.log('Response status:', response.status);
                 if (!response.ok) {
                     const error = await response.json().catch(() => null);
-                    console.error('Error response:', error);
+                    console.error('API Error:', error?.error?.message || response.status);
                     throw new Error(error?.error?.message || `HTTP error! status: ${response.status}`);
                 }
 
                 const data = await response.json();
-                console.log('Response data:', JSON.stringify(data, null, 2));
-
                 const result = this.parseResponse(activeService.provider, data);
                 
                 if (result.error) {
-                    console.error('Parse error:', result.error);
                     throw new Error(result.error);
                 }
 
-                console.log('Final parsed result:', result.content);
                 return result.content;
 
             } catch (error) {
@@ -516,7 +484,7 @@ export default class AIInterfacePlugin extends Plugin {
             }
 
         } catch (error) {
-            console.error('AI request failed:', error);
+            console.error('AI request failed:', error.message);
             new Notice(`AI Interface Error: ${error.message}`);
             throw error;
         }
@@ -799,7 +767,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
 
             // API Key (only for non-local providers)
             if (!activeService.isLocal) {
-                const apiKeyContainer = containerEl.createDiv();
+                const apiKeyContainer = containerEl.createDiv({ cls: 'ai-interface-api-key-container' });
                 
                 // Add the input setting
                 const apiKeySetting = new Setting(apiKeyContainer)
@@ -842,16 +810,9 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                     .setName('')
                     .setDesc(AIInterfacePlugin.maskApiKey(activeService.apiKey));
                 
-                // Style the masked key setting
-                const descEl = maskedKeySetting.descEl;
-                descEl.style.textAlign = 'right';
-                descEl.style.width = '100%';
-                descEl.style.color = 'var(--text-muted)';
-                
-                // Remove the separator line
-                maskedKeySetting.settingEl.style.borderTop = 'none';
-                
-                // Hide the control element since we don't need it
+                // Apply CSS classes
+                maskedKeySetting.descEl.addClass('ai-interface-masked-key');
+                maskedKeySetting.settingEl.addClass('ai-interface-masked-key-setting');
                 maskedKeySetting.controlEl.hide();
             }
 
@@ -882,7 +843,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
             }
 
             // Model Selection
-            const modelContainer = containerEl.createDiv();
+            const modelContainer = containerEl.createDiv({ cls: 'ai-interface-model-container' });
             new Setting(modelContainer)
                 .setName('Model')
                 .setDesc('Choose the AI model')
@@ -906,16 +867,14 @@ class AIInterfaceSettingTab extends PluginSettingTab {
                             await this.plugin.saveSettings();
                             
                             // Remove existing custom model input if it exists
-                            const existingCustomInput = modelContainer.querySelector('.custom-model-input');
+                            const existingCustomInput = modelContainer.querySelector('.ai-interface-custom-model');
                             if (existingCustomInput) {
                                 existingCustomInput.remove();
                             }
 
                             // Show custom model input if custom is selected
                             if (value === 'custom') {
-                                const customModelDiv = modelContainer.createDiv();
-                                customModelDiv.className = 'custom-model-input';
-                                customModelDiv.style.marginTop = '6px';
+                                const customModelDiv = modelContainer.createDiv({ cls: 'ai-interface-custom-model' });
                                 
                                 new Setting(customModelDiv)
                                     .setName('Custom model')
@@ -937,9 +896,7 @@ class AIInterfaceSettingTab extends PluginSettingTab {
             const isCustomModel = activeService.model && !modelIds.includes(activeService.model);
             
             if (activeService.model === 'custom' || !activeService.model || isCustomModel) {
-                const customModelDiv = modelContainer.createDiv();
-                customModelDiv.className = 'custom-model-input';
-                customModelDiv.style.marginTop = '6px';
+                const customModelDiv = modelContainer.createDiv({ cls: 'ai-interface-custom-model' });
                 
                 new Setting(customModelDiv)
                     .setName('Custom model')
@@ -1000,7 +957,10 @@ class AIInterfaceSettingTab extends PluginSettingTab {
         }
 
         // Advanced Settings
-        containerEl.createEl('h3', {text: 'Advanced settings'});
+        containerEl.createEl('h3', {
+            text: 'Advanced settings',
+            cls: 'ai-interface-section-header'
+        });
 
         new Setting(containerEl)
             .setName('Temperature')
