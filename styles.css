@@ -1,1 +1,36 @@
- 
+.ai-interface-custom-model {
+    margin-top: 6px;
+}
+
+.ai-interface-masked-key {
+    text-align: right;
+    width: 100%;
+    color: var(--text-muted);
+}
+
+.ai-interface-masked-key-setting {
+    border-top: none;
+}
+
+/* Container for model selection and custom input */
+.ai-interface-model-container {
+    margin-bottom: 12px;
+}
+
+/* Container for API key input and display */
+.ai-interface-api-key-container {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+/* Settings section headers */
+.ai-interface-section-header {
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+/* Warning button (for delete) */
+.ai-interface-warning-button {
+    color: var(--text-error);
+    background-color: var(--background-modifier-error);
+} 
