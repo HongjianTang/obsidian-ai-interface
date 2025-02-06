@@ -1,7 +1,7 @@
 {
     "id": "ai-interface",
     "name": "AI Interface",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "minAppVersion": "0.15.0",
     "description": "AI Interface sets up once then all plugins can use it.",
     "author": "HJ Tang",

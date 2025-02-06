@@ -1,6 +1,6 @@
 {
   "name": "ai-interface",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "AI Interface sets up once then all plugins can use it.",
   "main": "main.js",
   "scripts": {
