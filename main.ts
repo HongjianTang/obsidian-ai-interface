@@ -34,6 +34,19 @@ interface AIResponse {
     error?: string;
 }
 
+interface AIInterfaceAPI {
+    getCurrentConfiguration: () => AIInterfaceSettings;
+    isConfigured: () => boolean;
+    invokeAI: (prompt: string, options?: Partial<AIRequestOptions>) => Promise<string>;
+    onConfigurationChange: (callback: ConfigChangeCallback) => () => void;
+}
+
+declare global {
+    interface Window {
+        aiInterfacePlugin?: AIInterfaceAPI;
+    }
+}
+
 const DEFAULT_SETTINGS: AIInterfaceSettings = {
     activeService: 'default-openai',
     services: {
@@ -71,7 +84,7 @@ export default class AIInterfacePlugin extends Plugin {
         this.addSettingTab(new AIInterfaceSettingTab(this.app, this));
         
         // Register the global API
-        (window as any).aiInterfacePlugin = {
+        window.aiInterfacePlugin = {
             getCurrentConfiguration: () => ({...this.settings}),
             isConfigured: () => this.isConfigured(),
             invokeAI: async (prompt: string, options: Partial<AIRequestOptions> = {}) => {
@@ -85,7 +98,7 @@ export default class AIInterfacePlugin extends Plugin {
     }
     
     onunload() {
-        delete (window as any).aiInterfacePlugin;
+        delete window.aiInterfacePlugin;
     }
 
     private isConfigured(): boolean {
