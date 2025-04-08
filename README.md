@@ -9,7 +9,7 @@ Are you tired of setting up models and API keys in every single plugin?
 
 Are you a developer annoyed by having to build and update a separate system for each plugin—keeping track of model lists, local setups, and custom endpoints?
 
-If so, check out AI Interface. It’s a one-stop solution that simplifies all your AI/LLM settings for Obsidian.
+If so, check out AI Interface. It's a one-stop solution that simplifies all your AI/LLM settings for Obsidian.
 
 ## What It Does
 
@@ -59,35 +59,14 @@ PS: It's still under review, so you need to install it manually for now.
 
 Other plugins can take advantage of the AI Interface Plugin's centralized configuration and functionality. Below is a summary of the available API.
 
-### API Methods
+### Type Definitions
 
-- **`invokeAI(prompt: string, options: object): Promise<Response>`**
-    
-    *Sends a prompt to the configured AI model and returns a promise that resolves with the AI response.*
-
-- **`getCurrentConfiguration()`**
-    
-    *Returns the current AI/LLM configuration including API key, model, endpoint, and additional parameters.*
-    
-- **`isConfigured(): boolean`**
-    
-    *Returns a boolean indicating whether a valid AI/LLM configuration is present.*
-
-- **`onConfigurationChange(callback: Function)`**
-    
-    *Registers a callback function that is triggered whenever the AI/LLM configuration changes.*
-
-### Example Integration
-
-Other plugins can integrate with the AI Interface Plugin using the global API object (e.g., `window.aiInterfacePlugin`):
-
-```jsx
-// Example usage in another plugin
+```typescript
 interface AIRequestOptions {
-    temperature?: number;
-    maxTokens?: number;
-    model?: string;
-    systemPrompt?: string;
+    temperature?: number;    // Controls randomness (0-1)
+    maxTokens?: number;      // Maximum length of response
+    model?: string;         // Specific model to use
+    systemPrompt?: string;  // System prompt for the AI
 }
 
 interface AIServiceConfig {
@@ -103,32 +82,42 @@ interface AIServiceConfig {
 
 interface AIInterfaceSettings {
     activeService: string;
-    services: {
-        [key: string]: AIServiceConfig;
-    };
+    services: Record<string, AIServiceConfig>;
     temperature: number;
     maxTokens: number;
+    timeout: number;
 }
 
+interface AIInterfaceAPI {
+    getCurrentConfiguration: () => AIInterfaceSettings;
+    isConfigured: () => boolean;
+    invokeAI: (prompt: string, options?: Partial<AIRequestOptions>) => Promise<string>;
+    onConfigurationChange: (callback: (settings: AIInterfaceSettings) => void) => () => void;
+}
+
+// Declare the global API
+declare global {
+    interface Window {
+        aiInterfacePlugin?: AIInterfaceAPI;
+    }
+}
+```
+
+### Usage Examples
+
+1. **Basic Usage**
+```typescript
 class YourPlugin extends Plugin {
     async onload() {
-        // Get AI Interface plugin instance
-        const aiInterface = (window as any).aiInterfacePlugin;
-        
-        if (!aiInterface) {
+        // Check if AI Interface is available
+        if (!window.aiInterfacePlugin) {
             new Notice('AI Interface plugin is required');
-            return;
-        }
-
-        // Check if configured
-        if (!aiInterface.isConfigured()) {
-            new Notice('Please configure AI Interface first');
             return;
         }
 
         // Simple AI invocation
         try {
-            const response = await aiInterface.invokeAI(
+            const response = await window.aiInterfacePlugin.invokeAI(
                 "What is the capital of France?",
                 {
                     temperature: 0.7,
@@ -140,6 +129,162 @@ class YourPlugin extends Plugin {
             console.error('AI request failed:', error);
         }
     }
+}
+```
+
+2. **Advanced Usage with Configuration Monitoring**
+```typescript
+class AdvancedPlugin extends Plugin {
+    private unsubscribeConfig: () => void;
+
+    async onload() {
+        const ai = window.aiInterfacePlugin;
+        if (!ai) {
+            new Notice('AI Interface plugin is required');
+            return;
+        }
+
+        // Get current configuration
+        const config = ai.getCurrentConfiguration();
+        console.log('Current active service:', config.services[config.activeService]);
+
+        // Monitor configuration changes
+        this.unsubscribeConfig = ai.onConfigurationChange((newConfig) => {
+            console.log('AI configuration changed:', newConfig);
+            // Handle configuration changes...
+        });
+
+        // Add command for AI interaction
+        this.addCommand({
+            id: 'analyze-text',
+            name: 'Analyze Text',
+            callback: async () => {
+                if (!ai.isConfigured()) {
+                    new Notice('Please configure AI Interface first');
+                    return;
+                }
+
+                try {
+                    const response = await ai.invokeAI(
+                        "Analyze this text",
+                        {
+                            temperature: 0.3,
+                            maxTokens: 500,
+                            systemPrompt: "You are an analytical assistant."
+                        }
+                    );
+                    new Notice('Analysis complete');
+                } catch (error) {
+                    new Notice('Analysis failed: ' + error.message);
+                }
+            }
+        });
+
+        // Clean up on unload
+        this.register(() => this.unsubscribeConfig());
+    }
+}
+```
+
+3. **Editor Integration Example**
+```typescript
+class EditorPlugin extends Plugin {
+    async onload() {
+        const ai = window.aiInterfacePlugin;
+        if (!ai) return;
+
+        // Add command for context-aware AI assistance
+        this.addCommand({
+            id: 'analyze-current-note',
+            name: 'Analyze Current Note',
+            editorCallback: async (editor, view) => {
+                const currentText = editor.getValue();
+                
+                try {
+                    const analysis = await ai.invokeAI(
+                        `Analyze the following text:\n${currentText}`,
+                        {
+                            temperature: 0.5,
+                            maxTokens: 1000,
+                            systemPrompt: "You are an expert in text analysis."
+                        }
+                    );
+                    
+                    // Insert analysis at cursor position
+                    const cursor = editor.getCursor();
+                    editor.replaceRange('\n\nAI Analysis:\n' + analysis, cursor);
+                } catch (error) {
+                    new Notice('Analysis failed: ' + error.message);
+                }
+            }
+        });
+    }
+}
+```
+
+4. **Using Specific Models**
+```typescript
+class ModelSpecificPlugin extends Plugin {
+    async onload() {
+        const ai = window.aiInterfacePlugin;
+        if (!ai) return;
+
+        // Use a specific model
+        this.addCommand({
+            id: 'use-specific-model',
+            name: 'Use Specific Model',
+            callback: async () => {
+                try {
+                    const response = await ai.invokeAI(
+                        "Explain quantum computing",
+                        {
+                            model: "gpt-4-turbo",  // Specify model
+                            temperature: 0.7,
+                            maxTokens: 1000
+                        }
+                    );
+                    new Notice('Response received');
+                } catch (error) {
+                    new Notice('Request failed: ' + error.message);
+                }
+            }
+        });
+    }
+}
+```
+
+### Best Practices
+
+1. **Always check for plugin availability**
+```typescript
+if (!window.aiInterfacePlugin) {
+    new Notice('AI Interface plugin is required');
+    return;
+}
+```
+
+2. **Handle configuration changes**
+```typescript
+const unsubscribe = ai.onConfigurationChange((newConfig) => {
+    // Update your plugin's state based on new configuration
+});
+this.register(() => unsubscribe()); // Clean up on unload
+```
+
+3. **Error handling**
+```typescript
+try {
+    const response = await ai.invokeAI("Your prompt");
+} catch (error) {
+    new Notice('AI request failed: ' + error.message);
+}
+```
+
+4. **Check configuration status**
+```typescript
+if (!ai.isConfigured()) {
+    new Notice('Please configure AI Interface first');
+    return;
 }
 ```
 
